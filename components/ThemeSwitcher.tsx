@@ -17,7 +17,7 @@ function ThemeSwitcher() {
   if (!mounted) return null;
 
   return (
-    <Tabs defaultValue={theme}>
+    <Tabs defaultValue={theme || "light"}>
       <TabsList className="border">
         {/* Light theme trigger */}
         <TabsTrigger value="light" onClick={() => setTheme("light")}>
