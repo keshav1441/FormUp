@@ -1,17 +1,20 @@
 "use client";
 
 import { Form } from "@prisma/client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PreviewDialogBtn from "./PreviewDialogBtn";
 import PublishFormBtn from "./PublishFormBtn";
 import SaveFormBtn from "./SaveFormBtn";
 import Designer from "./Designer";
 import { DndContext, MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
 import DragOverlayWrapper from "./DragOverlayWrapper";
+import useDesigner from "./hooks/useDesigner";
+import { ImSpinner2 } from "react-icons/im";
 
 
 function FormBuilder({ form }: { form: Form }) {
-
+const {setElements}=useDesigner();
+const [isReady,setIsReady]=useState(false);
 const mouseSensor = useSensor(MouseSensor,{
   activationConstraint:{
     distance:10
@@ -27,6 +30,18 @@ const touchSensor = useSensor(TouchSensor,{
 
 const sensors=useSensors(mouseSensor,touchSensor);
 
+useEffect(()=>{
+  const elements = JSON.parse(form.content);
+  setElements(elements);
+  setIsReady(true);
+},[form,setElements]);
+
+if(!isReady){
+  <div className="flex flex-col items-center justify-center w-full h-full">
+    <ImSpinner2 className="animate-spin h-12 w-12" />
+  </div>
+}
+
   return (
     <DndContext sensors={sensors}>
         <main className="flex flex-col w-full">
@@ -41,7 +56,7 @@ const sensors=useSensors(mouseSensor,touchSensor);
 
           {!form.published && (
             <>
-              <SaveFormBtn />
+              <SaveFormBtn id={form.id} />
               <PublishFormBtn />
             </>
           )}
