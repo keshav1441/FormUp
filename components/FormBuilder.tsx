@@ -15,7 +15,7 @@ import { Button } from "./ui/button";
 import { useToast } from "@/components/hooks/use-toast"
 import Link from "next/link";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-
+import Confetti from "react-confetti";
 
 function FormBuilder({ form }: { form: Form }) {
   const { toast } = useToast(); 
@@ -53,6 +53,7 @@ const shareUrl = `${window.location.origin}/submit/${form.shareURL}`;
 
 if (form.published) {
   return (<>
+  <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false}  numberOfPieces={1000} />
     <div className="flex flex-col items-center justify-center h-full w-full">
       <div className="max-w-md">
         <h2 className="text-center text-3xl font-bold text-primary border-b pb-2 mb-10">
