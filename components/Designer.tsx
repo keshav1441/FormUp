@@ -34,6 +34,7 @@ function Designer() {
           idGenerator()
         );
         addElement(elements.length , newElement); 
+        return;
       }
 
       const isDroppingOverDesignerElementTopHalf = over.data?.current?.isTopHalfDesignerElement;
@@ -62,9 +63,9 @@ function Designer() {
         return;
       }
 
-      const isDraggingDesignerElement = over.data?.current?.isDesignerElement;
+      const isDraggingDesignerElement = active.data?.current?.isDesignerElement;
 
-      const draggingDesignerElementOverAnotherDesignerElement = droppingSidebarBtnOverDesignerElement && isDraggingDesignerElement;
+      const draggingDesignerElementOverAnotherDesignerElement = isDroppingOverDesignerElement && isDraggingDesignerElement;
 
       if(draggingDesignerElementOverAnotherDesignerElement){
         const activeId = active.data?.current?.elementId;
@@ -89,6 +90,7 @@ function Designer() {
         }
 
         addElement(indexForNewElement, activeElement);
+        return;
       }
     },
   });
