@@ -4,7 +4,7 @@ import { MdPreview } from "react-icons/md";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import useDesigner from "./hooks/useDesigner";
 import { FormElements } from "./FormElements";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden"; // Ensure this is installed and imported
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden"; 
 
 function PreviewDialogBtn() {
   const { elements } = useDesigner();
@@ -19,7 +19,6 @@ function PreviewDialogBtn() {
       </DialogTrigger>
 
       <DialogContent className="w-screen h-screen max-h-screen max-w-full flex flex-col flex-grow p-0 gap-0">
-        {/* Accessible DialogTitle */}
         <DialogTitle>
           <VisuallyHidden>
             Form Preview

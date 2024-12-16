@@ -10,9 +10,16 @@ import { DndContext, MouseSensor, TouchSensor, useSensor, useSensors } from "@dn
 import DragOverlayWrapper from "./DragOverlayWrapper";
 import useDesigner from "./hooks/useDesigner";
 import { ImSpinner2 } from "react-icons/im";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import { useToast } from "@/components/hooks/use-toast"
+import Link from "next/link";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 
 function FormBuilder({ form }: { form: Form }) {
+  const { toast } = useToast(); 
+
 const {setElements}=useDesigner();
 const [isReady,setIsReady]=useState(false);
 const mouseSensor = useSensor(MouseSensor,{
@@ -42,6 +49,55 @@ if(!isReady){
   </div>
 }
 
+const shareUrl = `${window.location.origin}/submit/${form.shareURL}`;
+
+if (form.published) {
+  return (<>
+    <div className="flex flex-col items-center justify-center h-full w-full">
+      <div className="max-w-md">
+        <h2 className="text-center text-3xl font-bold text-primary border-b pb-2 mb-10">
+        🎉🎉 Form Published 🎉🎉
+        </h2>
+        <h3 className="text-xl">Share this form</h3>
+        <h4 className="text-l text-muted-foreground border-b pb-10">
+          Anyone with the link can view and submit the form.
+        </h4>
+        <div className="my-4 flex flex-col gap-2 items-center w-full border-b pb-4">
+          <Input className="w-full" readOnly value={shareUrl} />
+          <Button
+            className="mt-2 w-full"
+            onClick={() => {
+              navigator.clipboard.writeText(shareUrl);
+              toast({
+                title: "Copied!",
+                description: "Link copied to clipboard.",
+              });
+            }}
+          >
+            Copy link
+          </Button>
+        </div>
+        <div className="flex justify-between">
+          <Button variant="link" asChild>
+            <Link href="/" className="gap-2">
+              <BsArrowLeft />
+              Go back home
+            </Link>
+          </Button>
+          <Button variant="link" asChild>
+            <Link href={`/forms/${form.id}`} className="gap-2">
+              Form details
+              <BsArrowRight />
+            </Link>
+          </Button>
+        </div>
+      </div>
+    </div>
+    </>
+  );
+}
+
+
   return (
     <DndContext sensors={sensors}>
         <main className="flex flex-col w-full">
@@ -50,14 +106,12 @@ if(!isReady){
           <span className="text-muted-foreground mr-2">Form:</span>
           {form.name}
         </h2>
-
         <div className="flex items-center gap-2">
           <PreviewDialogBtn />
-
           {!form.published && (
             <>
               <SaveFormBtn id={form.id} />
-              <PublishFormBtn />
+              <PublishFormBtn id={form.id}/>
             </>
           )}
         </div>
@@ -65,7 +119,6 @@ if(!isReady){
       <div className="flex w-full flex-grow items-center justify-center relative overflow-y-auto h-[200px] bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
         <Designer />
     </div>
-
     </main>
     <DragOverlayWrapper />
     </DndContext>
