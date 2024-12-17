@@ -123,3 +123,18 @@ export async function PublishForm(id :number) {
       }
   })
 }
+
+export async function GetFormContentByUrl(formUrl: string) {
+
+  const formi = await prisma.form.findFirst({
+    where: { shareURL: formUrl },
+    select: { content: true, id: true }, 
+  });
+  if (!formi) return null;
+  return await prisma.form.update({
+    where: { id: formi.id },
+    data: { visits: { increment: 1 } },
+    select: {content:true}
+  });
+
+}
