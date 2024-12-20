@@ -26,15 +26,15 @@ import { Textarea } from "./ui/textarea";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "@/components/hooks/use-toast"
-import { formSchema, FormSchemaType } from "@/schemas/form";
-import { CreateFrom } from "@/action/form";
+import { formSchema, formSchemaType } from "@/schemas/form";
+import { CreateForm } from "@/action/form";
 import { useRouter } from 'next/navigation'
 
 
 function CreateFormBtn() {
   const router = useRouter();
     const { toast } = useToast(); 
-    const form = useForm<FormSchemaType>({
+    const form = useForm<formSchemaType>({
       resolver: zodResolver(formSchema), 
       defaultValues: {
         name: "",
@@ -42,9 +42,9 @@ function CreateFormBtn() {
     }
     });
   
-    async function onSubmit(values: FormSchemaType) {
+    async function onSubmit(values: formSchemaType) {
       try {
-        const formId = await CreateFrom(values);
+        const formId = await CreateForm(values);
         toast({
           title: "Success",
           description: "Form created successfully",
