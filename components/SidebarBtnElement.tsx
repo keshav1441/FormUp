@@ -38,7 +38,7 @@ export function SidebarBtnElementDragOverlay({ formElement }: {formElement: Form
     return (
       <Button
         variant="outline"
-        className="flex flex-col gap-2 h-[120px] w-[120px] cursor-grab">
+        className="flex flex-col gap-2 h-[90px] w-[90px] cursor-grab">
         <Icon className="h-8 w-8 text-primary cursor-grab" />
         <p className="text-xs">{label}</p>
       </Button>
