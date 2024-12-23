@@ -54,6 +54,7 @@ function FormSubmitComponent({
                 description: "Something went wrong",
                 variant: "destructive"
             })
+            console.error("Error submitting form: ", error)
             
         }
         console.log("FORM VALUES", formValues.current) 

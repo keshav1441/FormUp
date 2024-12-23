@@ -1,6 +1,6 @@
 "use client"
 
-import { ElementsType, FormElement, FormElementInstance } from "../FormElements"
+import { ElementsType, FormElement } from "../FormElements"
 import { Label } from "../ui/label"
 import { RiSeparator } from "react-icons/ri";
 import { Separator } from "../ui/separator"
@@ -24,11 +24,11 @@ export const SeparatorFieldFormElement:FormElement = {
 }
 
 
-function PropertiesComponent({elementInstance}:{elementInstance: FormElementInstance}){
+function PropertiesComponent(){
     return <p className="">No properties from this element</p>
 }
 
-function DesignerComponent({ elementInstance }: { elementInstance: FormElementInstance }) {
+function DesignerComponent() {
 
   
     return (
@@ -41,7 +41,7 @@ function DesignerComponent({ elementInstance }: { elementInstance: FormElementIn
     );
   }
 
-function FormComponent({ elementInstance,}: { elementInstance: FormElementInstance;  }) {
+function FormComponent() {
     return (
       <Separator />
     );
