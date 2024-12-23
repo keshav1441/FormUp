@@ -3,14 +3,15 @@ import FormBuilder from "@/components/FormBuilder"; // Adjust the import accordi
 import { GetFormById } from "@/action/form";
 
 async function BuilderPage({ params }: { params: { id: string } }) {
-  const { id } = params; // No need to await here
-  const form = await GetFormById(Number(id));
-  
-  if (!form) {
-    throw new Error("Form not found");
+  const {id} = await params
+  const form = await GetFormById(Number(id)); 
+  if (!form){
+      throw new Error("Form not found")
   }
-  
-  return <FormBuilder form={form} />;
+
+return (
+  <FormBuilder form={form}/>
+);
 }
 
-export default BuilderPage;
+export default BuilderPage;
