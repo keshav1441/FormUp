@@ -49,12 +49,12 @@ function FormSubmitComponent({
             await SubmitForm(formUrl, jsonContent)
             setSubmitted(true)
         } catch (error) {
+            console.log(error)
             toast({
                 title: "Error",
                 description: "Something went wrong",
                 variant: "destructive"
             })
-            console.error("Error submitting form: ", error)
             
         }
         console.log("FORM VALUES", formValues.current) 
