@@ -1,7 +1,5 @@
-
 "use client";
 
-import { UserButton } from "@clerk/nextjs";
 import { ReactNode } from "react";
 import Logo from "../../components/Logo";
 import ThemeSwitcher from "../../components/ThemeSwitcher"
