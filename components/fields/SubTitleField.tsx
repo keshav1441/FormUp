@@ -94,7 +94,7 @@ function DesignerComponent({ elementInstance }: { elementInstance: FormElementIn
   
     return (
       <div className="flex flex-col gap-0.5 w-full"> 
-        <Label className="text-muted-foreground"> 
+        <Label className="text-muted-foreground mb-2"> 
           SubTitle Field
         </Label>
         <p className="text-lg">{title}</p>

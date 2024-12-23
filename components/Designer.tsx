@@ -114,11 +114,11 @@ function Designer() {
           )}
           {droppable.isOver && elements.length === 0 && (
             <div className="w-full p-4">
-              <div className="h-[100px] rounded-md bg-primary/20"></div>
+              <div className="h-[120px] rounded-md bg-primary/20"></div>
             </div>
           )}
           {elements.length > 0 && (
-            <div className="flex flex-col w-full gap-2 p-4">
+            <div className="flex flex-col w-full gap-2 p-3">
               {elements.map((element) => (
                 <DesignerElementWrapper key={element.id} element={element} />
               ))}
@@ -173,7 +173,7 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
     ref={draggable.setNodeRef}
     {...draggable.listeners}
     {...draggable.attributes}
-    className="relative h-[100px] flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset"
+    className="relative h-[120px] flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset"
     onMouseEnter={()=>{
       setMouseIsOver(true);
     }}
@@ -220,7 +220,7 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
       }
 
 
-      <div className={cn("flex w-full h-[100px] items-center rounded-md bg-accent/40 px-4 py-2 pointer-events-none opacity-100",
+      <div className={cn("flex w-full h-[120px] items-center rounded-md bg-accent/40 px-4 py-2 pointer-events-none opacity-100",
         mouseIsOver && "opacity-30",)}>
         <DesignerElement elementInstance={element} />
       </div>

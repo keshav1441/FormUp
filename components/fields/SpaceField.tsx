@@ -94,7 +94,7 @@ function DesignerComponent({ elementInstance }: { elementInstance: FormElementIn
   
     return (
       <div className="flex flex-col gap-0.5 w-full items-center"> 
-        <Label className="text-muted-foreground"> 
+        <Label className="text-muted-foreground mb-2"> 
           Space Field: {height}px
         </Label>
         <LuSeparatorHorizontal className="h-8 w-8" />
