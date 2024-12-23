@@ -5,6 +5,7 @@ import { Label } from "../ui/label"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useEffect } from "react"
 import useDesigner from "../hooks/useDesigner"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { BsTextParagraph } from "react-icons/bs"
@@ -12,11 +13,11 @@ import { Textarea } from "../ui/textarea"
 
 const type: ElementsType = "ParagraphField"
 const extraAttributes = {
-    text:"Text here",
+    text: "Text here",
 }
 
 const propertiesSchema = z.object({
-    text: z.string().min(2).max(500)
+    text: z.string().min(2).max(500),
 })
 
 export const ParagraphFieldFormElement:FormElement = {
@@ -34,7 +35,7 @@ export const ParagraphFieldFormElement:FormElement = {
     formComponent: FormComponent,
     propertiesComponent: PropertiesComponent,
     
-    validate: ()=> true,
+    validate: () => true
 }
 
 type CustomInstance = FormElementInstance & {
@@ -50,16 +51,20 @@ function PropertiesComponent({elementInstance}:{elementInstance: FormElementInst
         resolver: zodResolver(propertiesSchema),
         mode: "onBlur",
         defaultValues: {
-            text: element.extraAttributes.text,
+            text: element.extraAttributes.text
         }
     })
+    
+    useEffect(() =>{
+        form.reset(element.extraAttributes)
+    }, [element, form])
 
     function applyChanges(values: propertiesFormSchemaType){
         const {text} = values
         updateElement(element.id, {
             ...element,
             extraAttributes: {
-                text,
+                text
             }
         })
     }
@@ -70,9 +75,7 @@ function PropertiesComponent({elementInstance}:{elementInstance: FormElementInst
         }}>
             <FormField control={form.control} name="text" render={({field}) => (
                 <FormItem>
-                    <FormLabel>
-                        Text
-                    </FormLabel>
+                    <FormLabel>Text</FormLabel>
                     <FormControl>
                         <Textarea rows={5} {...field} onKeyDown={e =>{
                             if(e.key === "Enter") e.currentTarget.blur()
@@ -82,8 +85,6 @@ function PropertiesComponent({elementInstance}:{elementInstance: FormElementInst
                 </FormItem>
             )}
             />
-
-
         </form>
     </Form>
 }
@@ -94,18 +95,15 @@ function DesignerComponent({ elementInstance }: { elementInstance: FormElementIn
   
     return (
       <div className="flex flex-col gap-0.5 w-full"> 
-        <Label className="text-muted-foreground mb-3"> 
-          Paragraph Field
-        </Label>
-        <p >{text}</p>
+        <Label className="text-muted-foreground"> Paragraph Field</Label>
+        <p>{text}</p>
       </div>
     );
   }
 
-function FormComponent({ elementInstance,}: { elementInstance: FormElementInstance;  }) {
+function FormComponent({ elementInstance}: { elementInstance: FormElementInstance}) {
     const element = elementInstance as CustomInstance;
     const { text } = element.extraAttributes;
-    return (
-      <p className="text-xl">{text}</p>
-    );
+
+    return <p>{text}</p>
   }
