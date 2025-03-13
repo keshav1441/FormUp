@@ -26,7 +26,7 @@ https://github.com/user-attachments/assets/f3fe8c8e-9539-4866-984e-c7ec91aa7467
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/keshav1441/formup.git
+   git clone https://github.com/keshav1441/FormUp
    cd formup
    ```
 2. Install dependencies:
